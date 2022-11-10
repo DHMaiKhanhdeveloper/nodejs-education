@@ -4,7 +4,7 @@ const ExtractJwt = require("passport-jwt").ExtractJwt;
 const LocalStrategy = require("passport-local").Strategy;
 const GooglePlusTokenStrategy = require("passport-google-plus-token");
 const FacebookTokenStrategy = require('passport-facebook-token');
-const UsersModel = require("../models/UserModel");
+const UsersModel = require("../models/userModel");
 const passportConfig = require("../middlewares/passport");
 const { JWT_TOKEN, auth } = require("../configs/configs");
 // passport lấy token từ client và gửi lên server giải mã token có đúng ko ?

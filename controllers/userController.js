@@ -1,4 +1,4 @@
-const UsersModel = require("../models/UserModel");
+const UsersModel = require("../models/userModel");
 const {
     JWT_TOKEN
 } = require("../configs/configs");
