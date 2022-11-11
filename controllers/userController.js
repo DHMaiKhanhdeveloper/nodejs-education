@@ -137,6 +137,13 @@ const encodedToken = (userID) => {
 };
 const SignUp = async (req, res, next) => {
     const { username,job,phone, email, password } = req.value.reqBody;
+    // if (!username || !email || !password || !passwordConfirmation) {
+    //     return res.status(400).json({ 
+    //         "error": "true",
+    //         "for": "fields",
+    //         "msg": "fill all the fields"
+    //     })
+    // }
     const newUsers = new UsersModel({ username,job,phone, email, password });
 
     const foundUser = await UsersModel.findOne({ email });
