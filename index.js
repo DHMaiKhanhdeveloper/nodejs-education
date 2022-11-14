@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 var http = require("http");
+const connectDB = require("./db/connectDB");
 const Joi = require("joi");
 const app = express();
 
@@ -32,14 +33,16 @@ dotenv.config(); // doc file .env
 //     }
 //   );
 
-  mongoose.connect(
-    process.env.MOONGO_DB,
-    { useNewUrlParser: true, useUnifiedTopology: true,   connectTimeoutMS: 100})
-    .then((result)=>  console.log('Connected to MongoDB'))
-    .catch((error)=>  console.log(error));
-
+//   mongoose.connect(
+//     process.env.MOONGO_DB,
+//     { useNewUrlParser: true, useUnifiedTopology: true,   connectTimeoutMS: 1000, ssl: true})
+//     //serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+//     //socketTimeoutMS: 300000
+//     .then((result)=>  console.log('Connected to MongoDB'))
+//     .catch((error)=>  console.log(error));
+connectDB();
 const userRoute = require("./routes/userRouter");
-const { error } = require("console");
+// const { error } = require("console");
 app.use("/users", userRoute);
 
 // mongoose.connect((process.env.MOONGO_DB), ()=>{
@@ -82,7 +85,7 @@ app.use((err, req, res, next) => {
 });
 
 // const PORT = app.get("PORT") || 4000;
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running ....${PORT}`);
 });

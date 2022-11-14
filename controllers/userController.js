@@ -1,6 +1,7 @@
 const UsersModel = require("../models/userModel");
 const {
-    JWT_TOKEN
+    JWT_TOKEN,
+    PRIVATE_KEY
 } = require("../configs/configs");
 var jwt = require('jsonwebtoken');
 const http = require('http');
@@ -126,14 +127,15 @@ const newUserDeck = async (req, res, next) => {
     return res.status(201).json({ newDecks: newDeck });
 };
 
+var private_key = "-----BEGIN PRIVATE KEY-----\n" + PRIVATE_KEY + "\n-----END PRIVATE KEY-----"
 // gửi mã code chứa thông tin user thông qua mã hoá
 const encodedToken = (userID) => {
     return jwt.sign({ 
         iss: 'MaiKhanh',
         sub: userID, // id hoặc username
         iat: new Date().getTime(), // ngày phát hành
-        exp: new Date().setDate( new Date().getDate()+3) // thời gian gia hạn 3 ngày sau
-    }, JWT_TOKEN); // không biết được secretKey  => để server biết được đúng là secretKey mà server cũ generate ra
+        exp: new Date().setDate( new Date().getDate()+10) // thời gian gia hạn 10 ngày sau
+    }, JWT_TOKEN);
 };
 const SignUp = async (req, res, next) => {
     const { username,job,phone, email, password } = req.value.reqBody;
@@ -156,19 +158,19 @@ const SignUp = async (req, res, next) => {
     
     const  token =  encodedToken(newUsers._id)
     res.setHeader("authentication_token", token)
-    return res.status(201).json({ userRegiser: newUsers, success: true });
+    return res.status(201).json({ user: newUsers, success: true ,token:token});
 };
 const SignIn = async (req, res, next) => {
     // console.log("SignIn Successfully");
     // console.log("req.user ",req.user);
     const  password_token =  encodedToken(req.user._id)
     res.setHeader("authentication_token", password_token)
-    return res.status(201).json({ SignUpAuthentication: req.user, success: true, token:password_token });
+    return res.status(201).json({ user: req.user, success: true, token:password_token });
 };
 // passport lấy token từ client và gửi lên server giải mã token có đúng ko ?
 const Secret = async (req, res, next) => {
     const users = await UsersModel.find({});
-    return res.status(200).json({ userHeader: req.user , success: true  });
+    return res.status(200).json({ user: req.user , success: true  });
 };
 
 const AuthGoogle = async (req, res, next) => {

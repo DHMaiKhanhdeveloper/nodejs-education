@@ -1,4 +1,5 @@
 module.exports = {
+    PRIVATE_KEY: process.env.PRIVATE_KEY,
     JWT_TOKEN: process.env.JWT_TOKEN,
     auth: {
         google: {
