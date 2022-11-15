@@ -15,19 +15,19 @@ router
     .get(UserController.index)
     .post(requestBody(schemas.usernameBody), UserController.newUser);
 
-router
-    .route("/:userID")
-    .get(requestParam(schemas.IDSchemas, "userID"), UserController.getUser)
-    .put(
-        requestParam(schemas.IDSchemas, "userID"),
-        requestBody(schemas.usernameBody),
-        UserController.replaceUser
-    )
-    .patch(
-        requestParam(schemas.IDSchemas, "userID"),
-        requestBody(schemas.usernameOptionsBody),
-        UserController.updateUser
-    );
+// router
+//     .route("/:userID")
+//     .get(requestParam(schemas.IDSchemas, "userID"), UserController.getUser)
+//     .put(
+//         requestParam(schemas.IDSchemas, "userID"),
+//         requestBody(schemas.usernameBody),
+//         UserController.replaceUser
+//     )
+//     .patch(
+//         requestParam(schemas.IDSchemas, "userID"),
+//         requestBody(schemas.usernameOptionsBody),
+//         UserController.updateUser
+//     );
 router
     .route("/secret/Secrets")
     .get(
