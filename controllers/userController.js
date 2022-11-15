@@ -158,14 +158,15 @@ const SignUp = async (req, res, next) => {
     
     const  token =  encodedToken(newUsers._id)
     res.setHeader("authentication_token", token)
-    return res.status(201).json({ user: newUsers, success: true ,token:token});
+    return res.status(201).json({  success: true ,token:token});
 };
 const SignIn = async (req, res, next) => {
     // console.log("SignIn Successfully");
     // console.log("req.user ",req.user);
     const  password_token =  encodedToken(req.user._id)
     res.setHeader("authentication_token", password_token)
-    return res.status(201).json({ user: req.user, success: true, token:password_token });
+    return res.status(201).json({  success: true, token:password_token });
+    //user: req.user,
 };
 // passport lấy token từ client và gửi lên server giải mã token có đúng ko ?
 const Secret = async (req, res, next) => {
