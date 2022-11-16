@@ -165,7 +165,7 @@ const SignIn = async (req, res, next) => {
     // console.log("req.user ",req.user);
     const  password_token =  encodedToken(req.user._id)
     // res.setHeader("authentication_token", password_token)
-    return res.status(201).json({  success: true, token:password_token });
+    return res.status(201).json({ SignUpAuthentication: req.user, success: true });
     //user: req.user,
 };
 // passport lấy token từ client và gửi lên server giải mã token có đúng ko ?
