@@ -157,14 +157,14 @@ const SignUp = async (req, res, next) => {
     // token nên trả vào phần header để bảo mật token
     
     const  token =  encodedToken(newUsers._id)
-    // res.setHeader("authentication_token", token)
+    res.setHeader("authentication_token", token)
     return res.status(201).json({  success: true ,token:token});
 };
 const SignIn = async (req, res, next) => {
     // console.log("SignIn Successfully");
     // console.log("req.user ",req.user);
     const  password_token =  encodedToken(req.user._id)
-    // res.setHeader("authentication_token", password_token)
+    res.setHeader("authentication_token", password_token)
     return res.status(201).json({  success: true, token:password_token });
     //user: req.user,
 };
